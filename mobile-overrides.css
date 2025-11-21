@@ -1,0 +1,570 @@
+/* mobile-overrides.css
+   Optimized mobile-only overrides for Sanchita Pest Control
+   - Responsive drawer, hero improvements, form-first mobile order,
+     touch-friendly cards, performance & accessibility tweaks.
+   Apply by replacing your existing mobile-overrides.css with this file.
+*/
+
+/* base mobile variables (safe defaults) */
+:root{
+  --mobile-gap: 14px;
+  --mobile-radius: 12px;
+  --touch-min: 44px;
+  --accent: #0056a4;
+  --hero-overlay: rgba(3,12,33,0.62);
+  --drawer-width: 84%;
+  --drawer-bg: linear-gradient(180deg,#001f3f,#0056a4);
+}
+
+/* ---- global mobile zone ---- */
+@media (max-width: 768px) {
+
+  /* Ensure anchor hits do not hide under header */
+  section, header, .section, .hero { scroll-margin-top: 76px; }
+
+ /* NAVBAR: hamburger visible + premium dropdown */
+.hamburger {
+  display: block;
+  z-index: 1402;
+  cursor: pointer;
+}
+
+/* mobile dropdown menu */
+.nav-links {
+  position: absolute;
+  top: 64px;
+  right: 1.5rem;
+  display: none;                 /* hidden by default */
+  flex-direction: column;
+  gap: 0.4rem;
+  background: rgba(0, 31, 63, 0.97);
+  padding: 0.85rem 1rem;
+  border-radius: 14px;
+  box-shadow: 0 18px 40px rgba(0,0,0,0.45);
+  list-style: none;
+  min-width: 180px;
+}
+
+/* this is what JS toggles */
+.nav-links.show {
+  display: flex;
+  pointer-events: auto;
+}
+
+.nav-links a {
+  display: block;
+  padding: 0.55rem 0.7rem;
+  border-radius: 9px;
+  color: #fff;
+  text-decoration: none;
+  font-size: 0.95rem;
+}
+
+.nav-links a:hover {
+  background: rgba(255,255,255,0.08);
+}
+
+  /* Drawer backdrop */
+  .mobile-nav-backdrop {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.46);
+    z-index: 1400; opacity: 0; pointer-events: none; transition: opacity .22s ease;
+    -webkit-tap-highlight-color: transparent;
+    backdrop-filter: blur(3px);
+  }
+  .mobile-nav-backdrop.show { opacity: 1; pointer-events: auto; }
+
+  /* Drawer panel */
+  .mobile-nav-panel {
+    position: fixed; top: 0; right: 0; height: 100vh; width: var(--drawer-width);
+    max-width: 420px; background: var(--drawer-bg); z-index: 1401;
+    transform: translateX(100%); transition: transform .28s cubic-bezier(.2,.9,.2,1);
+    box-shadow: -16px 0 48px rgba(0,0,0,0.36); overflow-y: auto; -webkit-overflow-scrolling: touch;
+    padding: 18px; display:flex; flex-direction:column; gap:12px;
+  }
+  .mobile-nav-panel.show { transform: translateX(0); }
+
+  .mobile-nav-close {
+    align-self:flex-end; background:transparent; border:none; color:#fff;
+    font-size:28px; padding:6px 8px; cursor:pointer;
+  }
+
+  .mobile-nav-panel .mobile-nav-links { list-style:none; padding:6px 2px; margin:8px 0 18px 0; }
+  .mobile-nav-panel .mobile-nav-links a {
+    display:block; padding:12px 14px; color:#fff; font-size:1.05rem; text-decoration:none;
+    border-radius:10px; margin-bottom:6px;
+  }
+  .mobile-nav-panel .mobile-nav-links a:focus,
+  .mobile-nav-panel .mobile-nav-links a:hover {
+    background: rgba(255,255,255,0.08); outline: none;
+  }
+
+  /* while drawer open, lock body (class toggled by JS) */
+  html.mobile-nav-open, body.mobile-nav-open {
+    overflow: hidden !important; height: 100%; touch-action: none !important; -webkit-overflow-scrolling: auto !important;
+  }
+
+  /* Make header fixed and below drawer for visual depth */
+  .header { position: fixed; top: 0; left: 0; right: 0; z-index: 1300; }
+
+  /* HERO adjustments for mobile */
+  .hero {
+    position: relative; padding-top: 72px; padding-bottom: 16px;
+    min-height: calc(var(--vh,1vh) * 66);
+    display:flex; align-items:flex-start; justify-content:center; background-size:cover; background-position:center;
+    color: #fff;
+  }
+  .hero::before {
+    content: ""; position:absolute; inset:0; z-index:1;
+    background: linear-gradient(180deg, rgba(3,12,33,0.62) 0%, rgba(3,12,33,0.28) 45%, rgba(3,12,33,0.62) 100%);
+    pointer-events: none;
+  }
+  .hero-container { position:relative; z-index:2; width:100%; max-width:980px; padding:0 16px; box-sizing:border-box; display:block; }
+  .hero-row { display:flex; gap:16px; align-items:flex-start; justify-content:space-between; flex-direction:column; }
+  .hero-top { display:flex; flex-direction:column; gap:10px; }
+  .hero-content h1 { font-size:1.9rem; line-height:1.02; font-weight:800; margin:6px 0 8px; letter-spacing:0.2px; }
+  .hero-content p { font-size:0.98rem; line-height:1.45; margin:0 0 14px; color: rgba(255,255,255,0.95); max-width: 95%; }
+
+  .hero-buttons { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:8px; }
+  .hero-buttons .btn-primary, .hero-buttons .btn-secondary {
+    min-height:48px; border-radius:999px; padding:12px 18px; display:inline-flex; align-items:center; gap:8px; font-weight:700;
+  }
+  .hero-buttons .btn-primary { background:var(--accent); color:#fff; border:none; box-shadow: 0 12px 28px rgba(0,86,164,0.18); }
+  .hero-buttons .btn-secondary { background:transparent; color:#fff; border: 2px solid rgba(255,255,255,0.28); }
+
+  @media (max-width:420px) {
+    .hero-buttons { flex-direction: column; }
+    .hero-buttons .btn-primary, .hero-buttons .btn-secondary { width:100%; justify-content:center; }
+  }
+
+  /* Hero form compact */
+  .hero-form {
+    margin-top:14px; background: #ffffff; color:#111; padding:14px; border-radius:12px;
+    box-shadow: 0 12px 28px rgba(0,0,0,0.10); max-width: 520px;
+  }
+  .hero-form h3 { color: var(--accent); font-size:1.05rem; margin-bottom:0.75rem; text-align:left; }
+  .hero-form .form-group input, .hero-form .form-group select, .hero-form .form-group textarea {
+    font-size:0.98rem; padding:10px; border-radius:10px; border:1px solid #e6e6e6;
+  }
+
+  /* tidy up hero stats for mobile */
+  .hero-stats { display:flex; gap:8px; flex-wrap:wrap; font-size:0.85rem; color: rgba(255,255,255,0.88); margin-top:8px; }
+
+  /* Features grid: 2 columns for mobile */
+  .features-grid { display:grid; grid-template-columns: repeat(2, 1fr); gap:12px; margin-top:12px; }
+  .feature-item {
+    padding:16px; border-radius:14px; display:flex; flex-direction:column; align-items:center; gap:8px;
+    background: rgba(255,255,255,0.04); color:#fff; box-shadow: 0 8px 26px rgba(0,0,0,0.18);
+    border: 1px solid rgba(255,255,255,0.04);
+  }
+  .feature-icon { width:46px; height:46px; border-radius:999px; display:flex; align-items:center; justify-content:center; background: rgba(255,255,255,0.08); }
+
+  /* contact area polish */
+  .contact-grid { display:block; gap:12px; margin-top: 10px; }
+  .contact-form, .contact-info { margin-bottom:12px; padding:16px; border-radius:12px; box-shadow: 0 8px 22px rgba(0,0,0,0.06); }
+  .contact-info { background: #fff; color: #222; }
+  .contact-item { display:flex; gap:12px; align-items:flex-start; padding:10px 0; border-bottom: 1px solid #f1f1f1; }
+  .contact-item:last-child { border-bottom: none; }
+  .contact-item h4 { font-size:1rem; margin:0; color:#111; }
+  .contact-item p, .contact-item a { font-size:0.92rem; margin:4px 0 0; color:#444; }
+
+  /* make call/whatsapp buttons stacked for small screens */
+  .contact-info > div:last-child { display:flex; gap:10px; margin-top:12px; }
+  .btn-call-small, .btn-whatsapp-small { padding:10px 12px; border-radius:10px; flex:1; justify-content:center; font-weight:600; font-size:0.95rem; }
+  @media (max-width:420px) {
+    .contact-info > div:last-child { flex-direction:column; }
+  }
+
+  /* Gallery: ensure arrows don't overlap header */
+  .gallery-slider .prev, .gallery-slider .next { min-width:44px; min-height:44px; }
+  .gallery-slider .prev { left: 12px !important; }
+  .gallery-slider .next { right: 12px !important; }
+
+ 
+  /* whatsapp floating button: slightly larger hit area */
+  .whatsapp-btn { width:64px; height:64px; font-size:1.9rem; }
+
+  /* tiny input error shake (used by mobile.js) */
+  @keyframes _shake { 0%{transform:translateX(0)}20%{transform:translateX(-6px)}60%{transform:translateX(6px)}100%{transform:translateX(0)} }
+  .input-error-shake { animation: _shake .52s ease; border-color: #f44336 !important; box-shadow: 0 6px 20px rgba(244,67,54,0.06); }
+
+  /* utility visibility for sticky call button (mobile) */
+  .sticky-call-button { display:none; position:fixed; bottom:18px; left:50%; transform:translateX(-50%); z-index:1500; }
+
+  /* keep hero & important text readable on very small screens */
+  @media (max-width:360px) {
+    .hero-content h1 { font-size:1.6rem; }
+    .feature-item { padding:12px; }
+    .mobile-nav-panel { padding: 14px; }
+    :root { --drawer-width: 92%; }
+  }
+
+  /* Force mobile stacking order: Form -> Info -> Certificates */
+  .contact-grid { display:flex; flex-direction:column; }
+  .contact-form { order:1; }
+  .contact-info { order:2; }
+  
+
+  /* Performance hint: lighter overlay on tiny screens */
+  @media (max-width:420px) {
+    .hero::before { background: rgba(3,12,33,0.6); }
+    .mobile-nav-backdrop { backdrop-filter: none; }
+  }
+}
+
+/* Small utility: focus visible outlines and larger tap targets */
+a:focus, button:focus, input:focus, select:focus, textarea:focus {
+  outline: 3px solid rgba(0,86,164,0.18); outline-offset:2px; border-radius:8px;
+}
+a, .btn-primary, .btn-secondary, .btn-call-small, .btn-whatsapp-small {
+  min-height:44px; padding-top:10px; padding-bottom:10px;
+}
+
+/* end of mobile-overrides.css */
+/* Allow vertical scrolling to pass through slider on mobile */
+.rc-slider, .gallery-slider, .rc-track, .slides {
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-y;       /* allow vertical panning by default */
+  overscroll-behavior: contain; /* prevent sticky overscroll weirdness */
+}
+
+/* For each slide/card: allow pointer gestures */
+.rc-track > *, .slides > * {
+  touch-action: manipulation; /* minimal default: taps & clicks allowed, but vertical swipe passes */
+}
+/* ===== MOBILE SERVICES OPTIMIZATION ===== */
+@media (max-width: 768px) {
+
+  /* 2-column compact grid */
+  .services-grid {
+      grid-template-columns: repeat(2, 1fr) !important;
+      gap: 14px !important;
+      padding: 0 12px;
+  }
+
+  /* Smaller, tighter cards */
+  .service-card {
+      padding: 12px !important;
+      min-height: auto !important;
+      border-radius: 12px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.06) !important;
+  }
+
+  /* Uniform image size for ALL cards */
+  .service-icon img,
+  .service-card img {
+      width: 120px !important;
+      height: 120px !important;       /* 🔥 uniform size */
+      object-fit: cover !important;
+      border-radius: 10px;
+      margin-bottom: 10px;
+  }
+
+  /* Smaller heading for mobile */
+  .service-card h3 {
+      font-size: 1rem !important;
+      margin-bottom: 6px !important;
+  }
+
+  /* Hide long description on mobile */
+  .service-card p {
+      display: none !important;
+  }
+
+  /* CTA buttons full width if used */
+  .service-actions {
+      width: 100%;
+      justify-content: center;
+  }
+
+  .service-actions a {
+      flex: 1;
+      text-align: center;
+  }
+
+  /* OPTIONAL: 9th card centered */
+  .services-grid .service-card:nth-child(9) {
+      grid-column: 1 / -1;
+      max-width: 65%;
+      justify-self: center;
+  }
+
+  @media (max-width: 380px) {
+      .service-icon img { height: 120px !important; }
+      .services-grid .service-card:nth-child(9) { max-width: 80%; }
+  }
+}
+@media (max-width: 768px) {
+
+  /* Force mobile stacking: Contact Info → Contact Form → Certificates */
+  .contact-grid {
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 16px;
+  }
+
+  .contact-info {
+      order: 1 !important;
+  }
+
+  .contact-form {
+      order: 2 !important;
+  }
+}
+/* ===== MOBILE FORM IMPROVEMENTS ===== */
+@media (max-width: 768px) {
+
+  /* Center the entire contact form container */
+  .contact-form {
+      order: 2 !important;
+      width: 100%;
+      max-width: 420px;            /* center cleanly */
+      margin: 0 auto !important;   /* centers horizontally */
+      padding: 18px !important;
+      background: #ffffff;
+      border-radius: 14px;
+      box-shadow: 0 6px 22px rgba(0,0,0,0.08);
+  }
+
+  .contact-form h3 {
+      text-align: center;
+      color: #0056a4;
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 14px;
+  }
+
+  /* Stylish input fields */
+  .contact-form .form-group input,
+  .contact-form .form-group select,
+  .contact-form .form-group textarea {
+      width: 100%;
+      padding: 12px 14px;
+      font-size: 1rem;
+      border: 1px solid #d9d9d9;
+      border-radius: 10px;
+      background: #fafafa;
+      transition: all .2s ease;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+  }
+
+  /* Focus effect */
+  .contact-form .form-group input:focus,
+  .contact-form .form-group select:focus,
+  .contact-form .form-group textarea:focus {
+      border-color: #0056a4;
+      background: #fff;
+      box-shadow: 0 0 0 3px rgba(0,86,164,0.15);
+      outline: none;
+  }
+
+  /* Space between fields */
+  .contact-form .form-group {
+      margin-bottom: 14px;
+  }
+
+  /* Textarea compact height */
+  .contact-form textarea {
+      min-height: 90px;
+      resize: vertical;
+  }
+
+  /* Submit button full width & centered */
+  .contact-form button {
+      width: 100%;
+      padding: 12px;
+      border-radius: 12px;
+      background: #0056a4;
+      color: #fff;
+      font-size: 1.05rem;
+      font-weight: 700;
+      border: none;
+      box-shadow: 0 10px 24px rgba(0,86,164,0.25);
+      transition: transform .15s ease;
+  }
+
+  /* Nice tap/press animation */
+  .contact-form button:active {
+      transform: scale(0.97);
+  }
+}
+
+/* =========================
+   Footer – Mobile (tuned)
+   ========================= */
+
+@media (max-width: 768px) {
+  .footer {
+    margin-top: 32px;
+    font-size: 13px;
+    text-align: center;
+  }
+
+  .footer-main {
+    padding: 24px 0 18px;
+  }
+
+  /* Centered card */
+  .footer .footer-container {
+    width: 100%;
+    max-width: 360px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-areas:
+      "brand brand"
+      "quick services"
+      "contact contact";
+    row-gap: 16px;          /* slightly tighter */
+    column-gap: 16px;
+    justify-items: center;  /* center each grid cell */
+  }
+
+  /* TOP → Brand + Call */
+  .footer-brand {
+    grid-area: brand;
+  }
+
+  .footer-logo {
+    font-size: 18px;
+    margin-bottom: 4px;
+  }
+
+  .footer-tagline {
+    margin-bottom: 10px;
+  }
+
+  .footer-cta {
+    display: block;
+    width: 100%;
+    max-width: 260px;
+    margin: 10px auto 0;
+    text-align: center;
+  }
+
+  .footer-section {
+    font-size: 13px;
+  }
+
+  /* Remove default top margin from headings and keep small bottom */
+  .footer-heading {
+    margin: 0 0 8px;
+    font-size: 15px;
+  }
+
+  .footer-links li {
+    margin-bottom: 4px;
+  }
+
+  /* MIDDLE → Quick Links & Services centered in their columns */
+  .footer .footer-section:nth-of-type(2) {
+    grid-area: quick;
+    text-align: center;
+  }
+
+  .footer .footer-section:nth-of-type(3) {
+    grid-area: services;
+    text-align: center;
+  }
+
+  /* BOTTOM → Contact (less spacing) */
+  .footer-contact {
+    grid-area: contact;
+    text-align: center;
+    margin-top: 0;          /* kill extra gap above Contact */
+  }
+
+  .footer-contact-line {
+    margin: 2px 0;          /* tighter lines */
+  }
+
+  .footer-contact-line a {
+    display: inline-block;
+  }
+
+  /* Bottom strip */
+  .footer-bottom {
+    padding: 8px 0 14px;
+  }
+
+  .footer-bottom-inner {
+    max-width: 360px;
+    margin: 0 auto;
+    padding: 0 20px;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 4px;
+  }
+
+  .footer-copy,
+  .footer-credit {
+    font-size: 11px;
+  }
+}
+
+
+@media (max-width: 768px) {
+  .service-actions {
+    margin-top: 0.5rem;
+  }
+
+  .service-whatsapp-link {
+    font-size: 0.8rem;
+  }
+  @media (max-width: 768px) {
+  .visit-popup-close {
+    top: 8px;
+    right: 10px;
+    left: auto;
+  }
+}
+
+}
+/* Center the services grid on mobile & force 2 cards per row */
+@media (max-width: 768px) {
+  .services-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;      /* center the whole block */
+    gap: 10px;
+    padding: 0 6px 6px;         /* equal side padding */
+  }
+
+  .service-card {
+    flex: 0 0 calc(50% - 14px);   /* 2 cards per row */
+    max-width: calc(50% - 14px);
+    margin: 0;                    /* remove any old left/right margins */
+  }
+}
+.cert-text {
+    text-align: center;
+}
+/* === Fix cert → Get In Touch gap on mobile === */
+@media (max-width: 768px) {
+  /* almost no space below cert card */
+  .cert-strip {
+    padding-bottom: 0 !important;
+    margin-bottom: 0 !important;
+  }
+
+}
+
+@media (max-width: 768px) {
+  .contact-info > div:last-child {
+    display: flex;
+    gap: 10px;
+  }
+
+  .contact-info .btn-call-small,
+  .contact-info .btn-whatsapp-small {
+    flex: 1 1 0;
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* remove the inline left margin on WhatsApp button */
+  .contact-info .btn-whatsapp-small {
+    margin-left: 0 !important;
+  }
+}

@@ -1,0 +1,1254 @@
+/* =========================
+   Complete styles.css (contact info left, contact form right, certificates centered)
+========================= */
+
+/* ---------- Variables ---------- */
+:root{
+  --color-primary:#001f3f;
+  --color-primary-dark:#001530;
+  --color-accent:#0056a4;
+  --color-white:#ffffff;
+  --color-black:#000000;
+  --color-grey-light:#f5f5f5;
+  --color-grey-mid:#cccccc;
+  --color-grey-dark:#222222;
+  --color-muted:#555555;
+
+  --shadow-sm:0 2px 10px rgba(0,0,0,0.1);
+  --shadow-md:0 5px 20px rgba(0,0,0,0.15);
+  --shadow-lg:0 15px 35px rgba(0,0,0,0.25);
+
+  --radius-sm:8px; --radius-md:15px; --radius-lg:25px; --radius-xl:50px;
+  --transition:all 0.3s ease;
+  --font-primary:'Inter','Roboto',sans-serif;
+}
+
+/* ---------- Reset & base ---------- */
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--font-primary);
+  line-height:1.6;color:var(--color-grey-dark);
+  background:var(--color-white);overflow-x:hidden;
+}
+
+/* =========================
+   Header & Navigation
+========================= */
+.header{
+  background:linear-gradient(135deg,var(--color-primary) 0%,var(--color-accent) 100%);
+  color:var(--color-white);padding:1rem 0;
+  position:fixed;top:0;width:100%;z-index:1000;
+  box-shadow:var(--shadow-sm);transition:var(--transition);
+  display:block;
+}
+.nav-container{
+  max-width:1200px;margin:0 auto;display:flex;
+  justify-content:space-between;align-items:center;padding:0 2rem;
+}
+.logo{font-size:1.8rem;font-weight:700;color:var(--color-white);text-decoration:none}
+.nav-links{display:flex;list-style:none;gap:2rem}
+.nav-links a{color:var(--color-white);text-decoration:none;font-weight:500;padding:.5rem 1rem;border-radius:var(--radius-lg);transition:var(--transition)}
+.nav-links a:hover{background:rgba(255,255,255,0.15);transform:translateY(-2px)}
+.hamburger{display:none}
+.cta-button{
+  background:var(--color-accent);color:var(--color-white);
+  padding:.8rem 2rem;border-radius:var(--radius-lg);font-weight:600;text-decoration:none;
+  display:inline-block;transition:var(--transition)
+}
+.cta-button:hover{background:var(--color-primary-dark);transform:translateY(-3px);box-shadow:var(--shadow-md)}
+
+/* Sticky Call (mobile) */
+.sticky-call-button{
+  position:fixed;bottom:20px;left:50%;transform:translateX(-50%);
+  background:#25D366;color:#fff;padding:15px 25px;border-radius:50px;
+  font-weight:600;box-shadow:0 5px 20px rgba(0,0,0,0.3);z-index:1000;
+  display:none;align-items:center;gap:10px;animation:pulse-green 2s infinite;
+}
+@keyframes pulse-green{
+  0%{box-shadow:0 5px 20px rgba(37,211,102,0.4)}
+  50%{box-shadow:0 5px 30px rgba(37,211,102,0.8)}
+  100%{box-shadow:0 5px 20px rgba(37,211,102,0.4)}
+}
+@media (max-width:768px){ .sticky-call-button{ display:flex } }
+
+/* =========================
+   Hero
+========================= */
+.hero{min-height:100vh;display:flex;align-items:center;padding-top:80px;color:var(--color-white);background:var(--color-primary);position:relative}
+.hero-container{max-width:1200px;margin:0 auto;padding:0 2rem;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+.hero-content h1{font-size:3.5rem;font-weight:800;margin-bottom:1rem;text-shadow:2px 2px 4px rgba(0,0,0,0.3);animation:slideInLeft 1s ease-out}
+.hero-content p{font-size:1.3rem;margin-bottom:2rem;opacity:.95;animation:slideInLeft 1s ease-out .3s both}
+.hero-buttons {
+    width: 100%;
+    display: flex;
+    justify-content: center; /* Centers the Call Now button */
+    margin-top: 20px;
+}
+
+.btn-primary{background:var(--color-accent);color:var(--color-white);padding:1rem 2.5rem;border-radius:var(--radius-xl);font-size:1.1rem;font-weight:600;text-decoration:none;display:inline-block;transition:var(--transition)}
+.btn-primary:hover{background:var(--color-primary-dark);transform:translateY(-3px);box-shadow:var(--shadow-lg)}
+.btn-secondary{background:transparent;color:var(--color-white);padding:1rem 2.5rem;border:2px solid var(--color-white);border-radius:var(--radius-xl);font-weight:600;text-decoration:none}
+.btn-secondary:hover{background:var(--color-white);color:var(--color-primary);transform:translateY(-3px)}
+
+/* Hero form */
+.hero-form{background:var(--color-white);padding:2.5rem;border-radius:var(--radius-md);box-shadow:var(--shadow-lg);animation:slideInRight 1s ease-out}
+.hero-form h3{color:var(--color-primary);font-size:1.5rem;margin-bottom:1.5rem;text-align:center}
+.form-group{margin-bottom:1rem}
+.form-group input,.form-group select,.form-group textarea{
+  width:100%;padding:.8rem;border:2px solid var(--color-grey-mid);border-radius:var(--radius-sm);font-size:1rem;transition:var(--transition)
+}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{
+  outline:none;border-color:var(--color-accent);box-shadow:0 0 0 3px rgba(0,86,164,0.2)
+}
+
+/* =========================
+   Sections / Cards / Layout
+========================= */
+.section{padding:5rem 0}
+.container{max-width:1200px;margin:0 auto;padding:0 2rem}
+.section-title{text-align:center;font-size:2.5rem;font-weight:700;color:var(--color-primary);margin-bottom:3rem;position:relative}
+.section-title::after{content:'';position:absolute;bottom:-10px;left:50%;transform:translateX(-50%);width:80px;height:4px;background:linear-gradient(90deg,var(--color-primary),var(--color-accent));border-radius:2px}
+
+/* About / stats */
+.about{background:var(--color-grey-light)}
+.about-content{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+.about-text{font-size:1.1rem;line-height:1.8}
+.about-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:2rem;margin-top:2rem}
+.stat-item{background:var(--color-white);padding:1.5rem;border-radius:var(--radius-md);text-align:center;box-shadow:var(--shadow-md)}
+.stat-number{font-size:2rem;font-weight:700;color:var(--color-accent)}
+
+/* Services */
+.services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(350px,1fr));gap:2rem}
+.service-card{background:var(--color-white);padding:1.5rem;border-radius:var(--radius-md);box-shadow:var(--shadow-md);transition:var(--transition);border:2px solid transparent;display:flex;flex-direction:column;align-items:center;text-align:center}
+.service-card:hover{transform:translateY(-10px);box-shadow:var(--shadow-lg);border-color:var(--color-accent)}
+.service-icon{font-size:3rem;color:var(--color-accent);margin-bottom:1rem}
+.service-icon img{width:100% !important;height:auto !important;max-height:240px;object-fit:cover;border-radius:var(--radius-sm);margin-bottom:1rem;transition:transform .3s ease}
+.service-card:hover .service-icon img{transform:scale(1.1)}
+.service-card h3{font-size:1.5rem;margin-bottom:.8rem;color:var(--color-grey-dark)}
+.service-card p{font-size:1rem;color:var(--color-muted);margin-bottom:1rem;flex-grow:1}
+.service-actions{display:flex;gap:.5rem;margin-top:1rem}
+.btn-call-small,.btn-whatsapp-small{padding:.5rem 1rem;border-radius:var(--radius-sm);font-size:.9rem;text-decoration:none;transition:var(--transition)}
+.btn-call-small{background:var(--color-accent);color:#fff}
+.btn-whatsapp-small{background:#25D366;color:#fff}
+
+/* Certifications / features */
+.cert-item{background:#fff;padding:2rem;border-radius:var(--radius-md);text-align:center;box-shadow:var(--shadow-sm);transition:var(--transition)}
+.cert-item:hover{transform:translateY(-5px);box-shadow:var(--shadow-md)}
+.feature-item{ text-align:center;padding:2rem;border-radius:var(--radius-md);background:rgba(255,255,255,0.1);backdrop-filter:blur(10px);transition:var(--transition) }
+.feature-item:hover{transform:translateY(-5px);background:rgba(255,255,255,0.2)}
+.features{background:linear-gradient(135deg,var(--color-primary) 0%,var(--color-accent) 100%);color:var(--color-white)}
+.features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2rem}
+
+/* Reviews / blog */
+.reviews{background:var(--color-grey-light)}
+.reviews-container{max-width:800px;margin:0 auto}
+.google-reviews{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:2rem;margin-bottom:3rem}
+.review-card{background:#fff;padding:2rem;border-radius:var(--radius-md);box-shadow:var(--shadow-sm);text-align:center;transition:var(--transition)}
+.review-card:hover{transform:translateY(-5px);box-shadow:var(--shadow-md)}
+.stars{color:#FFD700;font-size:1.2rem;margin-bottom:1rem}
+.reviewer{color:var(--color-muted);font-style:italic;margin-top:1rem}
+
+/* =========================
+   Contact layout - UPDATED: info left, form right, certificates centered
+========================= */
+.contact{background:var(--color-grey-light);padding-bottom:0}
+
+/* Use named grid areas so we can control layout regardless of DOM order */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 420px 1fr; /* left column fixed (info), right flexible (form) */
+  grid-template-rows: auto auto;
+  grid-template-areas:
+    "info form"
+    "cert cert";
+  gap: 28px;
+  align-items: start;
+  margin-top: 1.5rem;
+  justify-items: stretch;
+}
+
+/* Assign areas */
+.contact-info { grid-area: info; }
+.contact-form { grid-area: form; }
+
+
+/* Shared card styles for contact area */
+.contact-form,
+.contact-info {
+  background: #fff;
+  border-radius: 12px;
+  padding: 22px;
+  box-shadow: 0 10px 30px rgba(10,20,40,0.06);
+}
+
+/* Certificates area spans full width and centers its content */
+
+
+/* Slight spacing and layout tuning for contact items */
+.contact-item { display: flex; gap: 14px; align-items: flex-start; margin-bottom: 12px; }
+.contact-item h4 { margin: 0; font-size: 1rem; color: #222; }
+.contact-item p { margin: 4px 0 0; color: #444; font-size: 0.95rem; }
+
+/* Buttons inside contact area */
+.btn-call-small, .btn-whatsapp-small {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 9px 12px; border-radius: 8px; font-weight:600; text-decoration:none;
+}
+.btn-call-small { background: var(--color-accent); color: #fff; }
+.btn-whatsapp-small { background: #25D366; color: #fff; }
+
+/* Contact images & compatibility */
+.contact-images{flex:1 1 300px;display:flex;justify-content:center;align-items:center;gap:20px;flex-wrap:wrap;padding-top:10px}
+.contact-img{width:200px;max-width:90%;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,0.1);transition:transform .3s ease}
+.contact-img:hover{transform:scale(1.05);box-shadow:0 6px 16px rgba(0,0,0,0.2)}
+
+/* =========================
+ /* =========================
+   Gallery – Premium slider
+========================= */
+
+.gallery-section {
+  background: radial-gradient(circle at top left, #0ea5e9 0%, #020617 45%, #020617 100%);
+  padding: 64px 16px 80px;
+  color: #e5e7eb;
+}
+
+.gallery-section .container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* Header (title + subtitle) */
+.gallery-header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.gallery-title {
+  margin: 0;
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: #f9fafb;
+}
+
+.gallery-subtitle {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #9ca3af;
+  max-width: 520px;
+}
+
+/* Slider frame */
+.gallery-slider {
+  position: relative;
+  border-radius: 24px;
+  overflow: hidden;
+  background: radial-gradient(circle at top left,
+              rgba(56, 189, 248, 0.16),
+              rgba(15, 23, 42, 1));
+  box-shadow: 0 22px 60px rgba(15, 23, 42, 0.75);
+}
+
+/* Slides strip */
+.gallery-slider .slides {
+  display: flex;
+  width: 100%;
+  transition: transform 0.65s cubic-bezier(0.22, 0.61, 0.36, 1);
+  will-change: transform;
+}
+
+.gallery-slider .slides img {
+  flex: 0 0 100%;
+  width: 100%;
+  height: clamp(240px, 52vh, 420px);
+  object-fit: cover;
+  display: block;
+  filter: saturate(1.05) contrast(1.03);
+}
+
+/* Soft fade at bottom for premium feel */
+.gallery-slider::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 90px;
+  background: linear-gradient(to bottom, transparent, rgba(15, 23, 42, 0.85));
+  pointer-events: none;
+}
+
+.learn-more {
+  color: var(--color-accent);
+  text-decoration: none;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: var(--transition);
+}
+
+.learn-more:hover {
+  color: var(--color-primary-dark);
+  transform: translateX(5px);
+}
+/* ---------- Responsive tweaks ---------- */
+
+@media (max-width: 768px) {
+  .gallery-section {
+    padding: 40px 0 56px;
+  }
+
+  .gallery-header {
+    align-items: center;
+    text-align: center;
+    margin-bottom: 18px;
+  }
+
+  .gallery-title {
+    font-size: 1.6rem;
+  }
+
+  .gallery-subtitle {
+    font-size: 0.9rem;
+  }
+
+  .gallery-slider {
+    border-radius: 18px;
+  }
+
+  .gallery-slider .slides img {
+    height: 230px;
+  }
+
+  .gallery-arrow {
+    width: 38px;
+    height: 38px;
+    box-shadow: 0 10px 26px rgba(15, 23, 42, 0.8);
+  }
+
+  .gallery-arrow.prev { left: 14px; }
+  .gallery-arrow.next { right: 14px; }
+}
+
+/* =========================
+   Certificate lightbox & certificate thumbnails
+========================= */
+.cert-lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.8);justify-content:center;align-items:center;z-index:999999;padding:20px}
+.cert-lightbox-img{max-width:90%;max-height:90%;object-fit:contain;border-radius:8px;box-shadow:0 10px 40px rgba(0,0,0,0.4);animation:certZoom .3s ease}
+@keyframes certZoom{from{transform:scale(.75);opacity:0}to{transform:scale(1);opacity:1}}
+.cert-close{position:absolute;top:20px;right:30px;font-size:40px;color:#fff;cursor:pointer;user-select:none;transition:.2s}
+.cert-close:hover{opacity:.7}
+
+
+/* =========================
+   WhatsApp widget / popup / thank-you
+========================= */
+.whatsapp-widget{position:fixed;bottom:30px;right:30px;z-index:1000}
+.whatsapp-btn{width:60px;height:60px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.8rem;background:#25D366;color:var(--color-white);box-shadow:0 5px 20px rgba(37,211,102,0.4);cursor:pointer;transition:var(--transition);animation:pulse 2s infinite}
+@keyframes pulse{0%{box-shadow:0 5px 20px rgba(37,211,102,0.4)}50%{box-shadow:0 5px 30px rgba(37,211,102,0.8)}100%{box-shadow:0 5px 20px rgba(37,211,102,0.4)}}
+.whatsapp-btn:hover{transform:scale(1.1);box-shadow:0 8px 30px rgba(37,211,102,0.6)}
+.whatsapp-popup{position:absolute;bottom:80px;right:0;width:300px;background:#fff;border-radius:var(--radius-md);box-shadow:var(--shadow-lg);display:none}
+.popup-header{background:var(--color-accent);color:#fff;padding:1rem;border-radius:var(--radius-md) var(--radius-md) 0 0;display:flex;justify-content:space-between;align-items:center}
+.popup-body{padding:1rem}
+.quick-questions{display:flex;flex-direction:column;gap:.5rem;margin-top:1rem}
+.quick-questions button{padding:.5rem;border:1px solid var(--color-accent);background:#fff;color:var(--color-accent);border-radius:var(--radius-sm);cursor:pointer;transition:var(--transition)}
+.quick-questions button:hover{background:var(--color-accent);color:#fff}
+
+/* Thank-you overlay */
+.thank-you-message{position:fixed;inset:0;background:rgba(0,0,0,0.8);display:flex;align-items:center;justify-content:center;z-index:2000}
+.thank-you-content{background:#fff;padding:3rem;border-radius:var(--radius-md);text-align:center;max-width:400px}
+.thank-you-content i{font-size:4rem;color:#25D366;margin-bottom:1rem}
+
+/* =========================
+   Animations & misc
+========================= */
+@keyframes slideInLeft{from{opacity:0;transform:translateX(-50px)}to{opacity:1;transform:translateX(0)}}
+@keyframes slideInRight{from{opacity:0;transform:translateX(50px)}to{opacity:1;transform:translateX(0)}}
+
+/* Lazy loading default (ensures images are visible if JS fails) */
+img[loading="lazy"]{opacity:1!important;visibility:visible!important;transition:opacity .3s ease}
+img[loading="lazy"].loaded{opacity:1!important;visibility:visible!important}
+
+/* =========================
+   Responsive adjustments
+========================= */
+@media (max-width:768px){
+  .nav-links{display:none;flex-direction:column;gap:1rem;background:var(--color-accent);position:absolute;top:60px;right:2rem;padding:1rem;border-radius:var(--radius-sm);z-index:1000}
+  .nav-links.show{display:flex}
+  .hero-container,.about-content{grid-template-columns:1fr;gap:2rem}
+  .hero-content h1{font-size:2.5rem}
+  .section-title{font-size:2rem}
+  .services-grid{grid-template-columns:1fr}
+  .features-grid{grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+  .hamburger{display:block;font-size:1.8rem;color:var(--color-white);cursor:pointer;z-index:1100}
+  .cta-button{display:none}
+  .whatsapp-popup{width:90%;right:5%}
+  .contact-img{width:160px}
+}
+
+/* Utilities */
+.text-center{text-align:center}
+.mt-2{margin-top:2rem}
+.hidden{display:none}
+
+/* --- FIX: Force gallery arrows to stay on left & right --- */
+.gallery-slider {
+  position: relative !important;
+}
+
+.gallery-slider .prev,
+.gallery-slider .next {
+  position: absolute !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  z-index: 9999 !important;
+}
+
+/* Correct LEFT arrow */
+.gallery-slider .prev {
+  left: 16px !important;
+  right: auto !important;
+}
+
+/* Correct RIGHT arrow */
+.gallery-slider .next {
+  right: 16px !important;
+  left: auto !important;
+}
+
+/* Mobile adjustments */
+@media (max-width: 480px) {
+  .gallery-slider .prev { left: 10px !important; }
+  .gallery-slider .next { right: 10px !important; }
+}
+
+/* ===== Fix: prevent gallery arrows overlapping the fixed header ===== */
+
+/* Ensure header is above everything */
+.header {
+  z-index: 1200 !important; /* higher than gallery arrows */
+}
+
+/* Keep arrows visually inside the gallery and below the header */
+.gallery-slider {
+  position: relative !important;
+  z-index: 10 !important; /* gallery itself sits below header */
+}
+
+/* Arrows must be above slides but below header */
+.gallery-slider .prev,
+.gallery-slider .next {
+  z-index: 100 !important; /* < header (1200) so they never overlap nav */
+  /* keep the aesthetic from previous rule set */
+  position: absolute !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+}
+
+/* Small visual nudge so arrows don't visually peek under the fixed navbar
+   when the gallery is placed very near the top of the page. */
+.gallery-section {
+  /* Adds a tiny top offset to prevent vertical overlap with header */
+  padding-top: 14px;
+}
+
+/* Mobile adjustment keep touch-targets comfortable */
+@media (max-width: 480px) {
+  .gallery-slider .prev,
+  .gallery-slider .next {
+    z-index: 100 !important;
+  }
+}
+
+/* =========== Tuning for 1505×776-ish screens =========== */
+/* Targets wide desktops around 1400–1600px (includes your 1505px) */
+@media (min-width: 1400px) and (max-width: 1600px) {
+  :root { --header-height: 84px; }
+
+  /* avoid header overlap */
+  body { padding-top: calc(var(--header-height) + 8px); }
+
+  /* slightly wider content for this screen */
+  .container, .nav-container {
+    max-width: 1300px;
+    padding-left: 32px;
+    padding-right: 32px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* header sizing */
+  .header { height: var(--header-height); align-items: center; }
+
+  /* Hero: more emphasis on headline, keep form neat */
+  .hero-container { grid-template-columns: 60% 40%; gap: 48px; align-items: center; }
+  .hero-content h1 { font-size: 3.9rem; line-height: 1.03; max-width: 760px; }
+  .hero-content p { font-size: 1.18rem; max-width: 700px; }
+
+  .hero-form { max-width: 460px; margin-left: auto; padding: 2.75rem; }
+
+  /* Services: 3 columns with consistent card height and spacing */
+  .services-grid { grid-template-columns: repeat(3, 1fr); gap: 30px; }
+  .service-card { min-height: 340px; padding: 1.9rem; }
+  .service-icon img { max-height: 200px; }
+
+  /* About: comfortable split */
+  .about-content { grid-template-columns: 56% 44%; gap: 44px; }
+
+  /* Features: 3 columns, tighter spacing */
+  .features-grid { grid-template-columns: repeat(3, 1fr); gap: 28px; }
+
+  /* Small responsive safeguard for wide screens */
+  @media (min-width: 1400px) {
+    .contact-grid { grid-template-columns: 480px 1fr; gap: 36px; }
+  }
+
+  /* Gallery: centered, arrows nudged inward from header */
+  .gallery-slider { max-width: 980px; margin-left: auto; margin-right: auto; }
+  .gallery-section { padding-top: 30px; padding-bottom: 84px; }
+  .gallery-slider .prev { left: 24px !important; }
+  .gallery-slider .next { right: 24px !important; }
+  /* Section rhythm */
+  .section { padding-top: 6.5rem; padding-bottom: 6.5rem; }
+
+/* Softer hover for large screens */
+@media (min-width: 1400px) {
+  .service-card:hover,
+  .cert-item:hover,
+  .review-card:hover,
+  .blog-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 14px 32px rgba(15, 23, 42, 0.12);
+  }
+}
+
+}
+
+/* ===== Stacked mobile view: Info, Form, Certificates (the order you requested) ===== */
+@media (max-width: 991px) {
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "info"
+      "form"
+      "cert";
+    gap: 18px;
+  }
+
+  .contact-info, .contact-form, .contact-certificates .certificate {
+    padding: 16px;
+    border-radius: 10px;
+  }
+
+  /* slightly smaller certificate thumbnails for mobile */
+  
+}/* =========================
+   Testimonials: smooth desktop auto-scroll + touch-friendly mobile
+   - No vertical scroll on mobile
+   - Equal heights
+   - Auto-scroll enabled only on non-touch desktops via JS
+========================= */
+
+/* Tunables */
+:root {
+  --rc-gap: 16px;
+  --rc-card-bg: #fff;
+  --rc-card-radius: 12px;
+  --rc-card-shadow: 0 10px 30px rgba(10,20,40,0.06);
+  --rc-loop-duration: 36s; /* CSS loop duration when enabled on desktop */
+}
+
+/* Slider wrapper */
+.rc-slider {
+  width: 100%;
+  overflow: hidden; overflow-y: hidden;         /* hide overflow */
+  margin: 1.25rem 0 1.75rem;
+  position: relative;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Track (default is touch-friendly horizontal scroller) */
+.rc-track {
+  display: flex;
+  gap: var(--rc-gap);
+  align-items: center;      /* prevents vertical overflow */
+  box-sizing: border-box;
+  padding: 8px 6px;
+  overflow-x: auto;         /* mobile: allow native swipe */
+  overflow-y: hidden;       /* prevent vertical scroll */
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  touch-action: pan-x;      /* prevent vertical pan while allowing horizontal swipes */
+  scrollbar-width: none;    /* hide firefox scrollbar */
+}
+.rc-track::-webkit-scrollbar { display: none; height: 0; }
+
+/* Individual card baseline (mobile-first) */
+.rc-track .review-card {
+  scroll-snap-align: center;
+  flex: 0 0 auto;
+  width: calc(88vw - 40px);  /* mobile: roomy single card with peek */
+  min-width: calc(88vw - 40px);
+  max-width: calc(88vw - 40px);
+  height: 240px;             /* equal height mobile */
+  box-sizing: border-box;
+  padding: 1.25rem;
+  border-radius: var(--rc-card-radius);
+  background: var(--rc-card-bg);
+  box-shadow: var(--rc-card-shadow);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;          /* ensure inner content cannot increase height */
+}
+/* === Softer shadows for testimonials === */
+.rc-track .review-card {
+  /* was: 0 10px 30px rgba(10,20,40,0.06) */
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.05);
+}
+
+@media (min-width: 900px) {
+  .rc-track .review-card {
+    /* desktop: a bit stronger but still soft */
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+  }
+}
+
+/* Desktop: fixed card widths and taller */
+@media (min-width: 900px) {
+  .rc-track .review-card {
+    width: 360px;
+    min-width: 360px;
+    max-width: 360px;
+    height: 260px;
+  }
+  .rc-track { gap: 18px; padding: 8px 0; overflow-x: hidden; } /* on desktop we hide native scroll when animation runs */
+}
+
+/* Very wide screens */
+@media (min-width: 1300px) {
+  .rc-track .review-card {
+    width: 400px;
+    min-width: 400px;
+    max-width: 400px;
+    height: 280px;
+  }
+}
+
+/* Prevent images or long text from stretching cards */
+.rc-track .review-card img,
+.rc-track .review-card svg {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+.rc-track .review-card * { box-sizing: border-box; max-width:100%; }
+
+/* Text styling */
+.review-card .stars { color:#FFD700; font-size:1.05rem; margin-bottom:6px; }
+.review-card .review-text { color:var(--color-muted); font-size:1rem; line-height:1.5; margin-bottom:8px; overflow:hidden; }
+.review-card .reviewer { color:var(--color-grey-dark); font-weight:700; font-size:0.95rem; }
+
+/* Hover lift (only for pointer fine) */
+@media (hover: hover) and (pointer: fine) {
+  .rc-track .review-card:hover {
+    transform: translateY(-6px);
+    transition: transform .22s ease;
+    box-shadow: 0 18px 50px rgba(10,20,40,0.08);
+  }
+}
+
+/* Edge fade masks for premium feel (mobile) */
+.rc-slider::before, .rc-slider::after {
+  content: "";
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 8%;
+  pointer-events: none;
+  z-index: 6;
+  display: none;
+}
+@media (max-width: 899px) {
+  .rc-slider::before, .rc-slider::after { display:block; }
+  .rc-slider::before { left: 0; background: linear-gradient(90deg, rgba(255,255,255,1), rgba(255,255,255,0)); }
+  .rc-slider::after  { right:0; background: linear-gradient(270deg, rgba(255,255,255,1), rgba(255,255,255,0)); }
+}
+
+/* Animation keyframe for desktop infinite loop (JS toggles .rc-animate) */
+@keyframes rc-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); } /* requires duplicated nodes */
+}
+
+/* When JS enables animation (only on non-touch desktop), .rc-animate is applied to track */
+.rc-track.rc-animate {
+  animation: rc-scroll var(--rc-loop-duration) linear infinite;
+  will-change: transform;
+  overflow: visible; /* allow transform to show clone region */
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .rc-track { animation: none !important; scroll-behavior: auto; }
+}
+
+/* Defensive: ensure no vertical overflow on any browser */
+.rc-slider, .rc-track, .rc-track .review-card { -ms-overflow-style: none; }
+/* ===== rc JS-driven continuous scroll mode ===== */
+
+/* When JS wants to drive the scroller it adds .rc-js-scroll to the track */
+.rc-track.rc-js-scroll {
+  overflow-y: hidden !important;
+  width: max-content;        /* long strip (JS will transform it) */
+  overflow: hidden !important;   /* hide native scrollbars */
+  scroll-snap-type: none !important;
+  -webkit-overflow-scrolling: auto !important;
+  -ms-overflow-style: none;
+  transform: translateX(0); /* JS will mutate translateX */
+  will-change: transform;
+}
+
+/* Make sure clones are inert and visually identical */
+.rc-track [data-rc-clone] { pointer-events: none; }
+
+/* Defensive: ensure no vertical overflow for JS mode */
+.rc-slider, .rc-track.rc-js-scroll {
+  overflow-y: hidden !important; overflow-y: hidden !important; }
+
+/* Optional: slightly reduce gap for smoother continuous look in JS mode */
+.rc-track.rc-js-scroll {
+  overflow-y: hidden !important; gap: 14px; }
+/* =========================
+   Footer (Desktop / Default)
+   ========================= */
+
+.footer {
+  background: #020617;           /* dark, professional background */
+  color: #e5e7eb;
+  margin-top: 64px;
+  font-size: 14px;
+}
+
+.footer-main {
+  padding: 40px 0;
+}
+
+.footer-container {
+  max-width: 1120px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  gap: 48px;
+  align-items: flex-start;
+}
+
+/* Sections */
+
+.footer-section {
+  flex: 1;
+  min-width: 0;
+}
+
+.footer-brand {
+  max-width: 320px;
+}
+
+.footer-logo {
+  font-size: 20px;
+  font-weight: 700;
+  color: #f9fafb;
+  margin-bottom: 8px;
+}
+
+.footer-tagline {
+  color: #9ca3af;
+  line-height: 1.5;
+  margin-bottom: 16px;
+}
+
+/* CTA Button */
+
+.footer-cta {
+  display: inline-block;
+  padding: 10px 20px;
+  border-radius: 999px;
+  background: #22c55e;           /* accent color */
+  color: #020617;
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+  box-shadow: 0 10px 25px rgba(34, 197, 94, 0.25);
+}
+
+.footer-cta:hover {
+  background: #16a34a;
+  transform: translateY(-1px);
+  box-shadow: 0 16px 30px rgba(34, 197, 94, 0.3);
+}
+
+/* Headings & lists */
+
+.footer-heading {
+  font-size: 16px;
+  font-weight: 600;
+  color: #f9fafb;
+  margin-bottom: 12px;
+}
+
+.footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-links li {
+  margin-bottom: 6px;
+  color: #9ca3af;
+}
+
+.footer-links a {
+  color: #9ca3af;
+  text-decoration: none;
+  transition: color 0.15s ease, text-decoration-color 0.15s ease;
+}
+
+.footer-links a:hover {
+  color: #e5e7eb;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+}
+
+/* Contact lines */
+
+.footer-contact-line {
+  margin: 4px 0;
+  color: #9ca3af;
+}
+
+.footer-contact-line a {
+  color: #e5e7eb;
+  text-decoration: none;
+}
+
+.footer-contact-line a:hover {
+  text-decoration: underline;
+}
+
+/* Social (if used) */
+
+.footer-social {
+  margin-top: 10px;
+  display: flex;
+  gap: 8px;
+}
+
+.footer-social-link {
+  font-size: 13px;
+  color: #e5e7eb;
+  text-decoration: none;
+  opacity: 0.8;
+}
+
+.footer-social-link:hover {
+  opacity: 1;
+}
+
+/* Bottom strip */
+
+.footer-bottom {
+  border-top: 1px solid rgba(148, 163, 184, 0.2);
+  padding: 12px 0;
+  background: #020617;
+}
+
+.footer-bottom-inner {
+  max-width: 1120px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+
+.footer-copy,
+.footer-credit {
+  margin: 0;
+  color: #6b7280;
+  font-size: 12px;
+}
+
+
+/* =========================
+   WhatsApp Widget
+========================= */
+.whatsapp-widget {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  z-index: 1000;
+}
+
+.whatsapp-btn {
+  width: 60px;
+  height: 60px;
+  background: #25D366;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-white);
+  font-size: 1.8rem;
+  box-shadow: 0 5px 20px rgba(37, 211, 102, 0.4);
+  transition: var(--transition);
+  cursor: pointer;
+  animation: pulse 2s infinite;
+}
+
+.whatsapp-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 8px 30px rgba(37, 211, 102, 0.6);
+}
+
+.whatsapp-popup {
+  position: absolute;
+  bottom: 80px;
+  right: 0;
+  width: 300px;
+  background: white;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  display: none;
+}
+
+.popup-header {
+  background: var(--color-accent);
+  color: white;
+  padding: 1rem;
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* =========================
+   Auto Visit Popup Form
+========================= */
+
+html.modal-open,
+body.modal-open {
+  overflow: hidden;
+}
+
+/* Fullscreen container */
+.visit-popup {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1600;
+}
+
+.visit-popup.show {
+  display: flex;
+}
+
+/* Dark blurred background */
+.visit-popup-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(6px);
+}
+
+/* Dialog card */
+.visit-popup-dialog {
+  position: relative;
+  z-index: 1;
+  width: min(420px, 92vw);
+  border-radius: 22px;
+  padding: 22px 22px 18px;
+  background: radial-gradient(circle at top left,
+              rgba(56, 189, 248, 0.18),
+              #020617 55%,
+              #020617 100%);
+  box-shadow: 0 26px 80px rgba(0, 0, 0, 0.9);
+  color: #e5e7eb;
+  transform: translateY(10px);
+  opacity: 0;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.visit-popup.show .visit-popup-dialog {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Skip / close button */
+.visit-popup-close {
+  position: absolute;
+  top: 10px;
+  right: 14px;
+  border: none;
+  background: rgba(15, 23, 42, 0.9);
+  color: #e5e7eb;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+  transition: transform 0.18s ease, background 0.18s ease, opacity 0.18s ease;
+}
+
+.visit-popup-close:hover {
+  transform: translateY(-1px);
+  background: rgba(15, 23, 42, 1);
+}
+
+/* Header */
+.visit-popup-header {
+  margin-bottom: 16px;
+  padding-right: 40px; /* room for skip button */
+}
+
+.visit-popup-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 11px;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  border: 1px solid rgba(34, 197, 94, 0.55);
+  background: rgba(22, 163, 74, 0.16);
+  color: #bbf7d0;
+  margin-bottom: 8px;
+}
+
+.visit-popup-header h3 {
+  margin: 0 0 4px;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #f9fafb;
+}
+
+.visit-popup-header p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #9ca3af;
+}
+
+/* Form layout */
+.visit-popup-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+/* Fix: make name & phone columns equal and inputs full width */
+.visit-popup-row {
+  display: flex;
+  gap: 10px;
+}
+
+.visit-popup-group {
+  flex: 1;                /* both columns same width */
+}
+
+/* ensure all fields stretch nicely */
+.visit-popup-group input,
+.visit-popup-group select,
+.visit-popup-group textarea {
+  width: 100%;
+}
+
+
+.visit-popup-group label {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #9ca3af;
+}
+
+.visit-popup-group input,
+.visit-popup-group select,
+.visit-popup-group textarea {
+  border-radius: 10px;
+  border: 1px solid rgba(148, 163, 184, 0.6);
+  padding: 8px 10px;
+  font-size: 0.9rem;
+  background: rgba(15, 23, 42, 0.92);
+  color: #e5e7eb;
+  outline: none;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+}
+
+.visit-popup-group input::placeholder,
+.visit-popup-group textarea::placeholder {
+  color: #6b7280;
+}
+
+.visit-popup-group input:focus,
+.visit-popup-group select:focus,
+.visit-popup-group textarea:focus {
+  border-color: #0ea5e9;
+  box-shadow: 0 0 0 1px rgba(14, 165, 233, 0.6);
+}
+
+/* Submit button */
+.visit-popup-submit {
+  width: 100%;
+  margin-top: 4px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-weight: 600;
+  box-shadow: 0 18px 45px rgba(37, 99, 235, 0.5);
+}
+/* Final positioning for Skip button */
+.visit-popup-close {
+  position: absolute !important;
+  top: 12px !important;
+  right: 18px !important;
+  left: auto !important;
+
+  margin: 0 !important;
+  transform: none !important;
+
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.9);
+  color: #e5e7eb;
+  font-size: 0.78rem;
+  border: none;
+  cursor: pointer;
+  z-index: 5;
+}
+
+/* Note text */
+.visit-popup-note {
+  margin-top: 6px;
+  font-size: 0.78rem;
+  color: #6b7280;
+  text-align: center;
+}
+
+/* Mobile tweaks */
+@media (max-width: 768px) {
+  .visit-popup-dialog {
+    width: 94vw;
+    padding: 18px 16px 16px;
+    border-radius: 18px;
+  }
+
+  .visit-popup-row {
+    flex-direction: column;
+  }
+
+  .visit-popup-close {
+    top: 8px !important;
+    right: 12px !important;
+  }
+}
+
+/* === Softer shadows for contact + certificates === */
+
+.contact-info,
+.contact-certificates .certificate {
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.05);
+}
+/* =========================
+   Certificates strip under "Why Choose" – compact & minimal
+========================= */
+
+.cert-strip {
+  
+  padding: 8px 0 4px;          /* very small vertical space */
+}
+
+.cert-strip .container {
+  max-width: 900px;            /* narrower so it feels compact */
+}
+
+/* inner card */
+.cert-strip-inner {
+  max-width: 720px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 10px 16px;
+  border-radius: 14px;
+}
+/* Certificates hover effects */
+
+
+/* Slight zoom + glow on images */
+.cert-images img {
+  cursor: zoom-in;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.cert-images img:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 6px 14px rgba(15, 23, 42, 0.12);
+}
+
+/* certificate images */
+.cert-images {
+  flex: 0 0 auto;
+  display: flex;
+  gap: 12px;
+  padding: 16px 18px;
+  border-radius: 10px;
+
+ 
+}
+
+.cert-images img {
+  width: 130px;
+  max-width: 100%;
+  border-radius: 8px;
+  object-fit: contain;
+}
+
+/* text */
+.cert-text {
+  flex: 1 1 240px;
+  min-width: 240px;
+}
+
+.cert-text h3 {
+  margin: 0 0 3px;
+  font-size: 1.1rem;
+  color: #111827;
+}
+
+.cert-text p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #4b5563;
+}
+
+/* Tighten top space only for Get In Touch section */
+.section.contact {
+  padding-top: 32px;   /* smaller than the default section padding */
+}
+
